@@ -11,7 +11,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import Update from "../../components/update/Update";
@@ -24,12 +24,6 @@ const Profile = () => {
   const { currentUser } = useContext(AuthContext);
 
   const userId = parseInt(useLocation().pathname.split("/")[2]);
-
-  // const { isLoading, error, data } = useQuery(["user"], () =>
-  //   makeRequest.get("/users/find/" + userId).then((res) => {
-  //     return res.data;
-  //   })
-  // );
 
   const { isLoading: rIsLoading, data: relationshipData } = useQuery(
     ["relationship"],
@@ -60,7 +54,6 @@ const Profile = () => {
   };
 
   ////////////////
-  const navigate = useNavigate();
 
   const [profileData, setProfileData] = useState({});
   const [notFound, setNotFound] = useState(false);
@@ -75,6 +68,10 @@ const Profile = () => {
         setNotFound(true);
         console.log(err);
       });
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   if (notFound) {

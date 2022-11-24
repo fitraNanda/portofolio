@@ -7,6 +7,7 @@ import moment from "moment";
 import { useState } from "react";
 import Axios from "axios";
 import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Comments = (props) => {
   const [desc, setDesc] = useState("");
@@ -92,10 +93,15 @@ const Comments = (props) => {
                   src={"http://localhost:8800/upload/" + val.profilePic}
                   alt=""
                 />
-                <div className="info">
-                  <span>{val.name}</span>
-                  <p>{val.desc}</p>
-                </div>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to={`/profile/${val.userId}`}
+                >
+                  <div className="info">
+                    <span>{val.name}</span>
+                    <p>{val.desc}</p>
+                  </div>
+                </Link>
                 <span className="date">{moment(val.createdAt).fromNow()}</span>
               </div>
             );

@@ -67,6 +67,7 @@ export const register = (req, res) => {
           res.status(200).send({
             message: "Registration success",
             success: true,
+            resMail,
           });
         });
       }
@@ -108,13 +109,7 @@ export const login = (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res
-    .clearCookie("accessToken", {
-      secure: true,
-      sameSite: "none",
-    })
-    .status(200)
-    .json("User has been logout");
+  res.status(202).clearCookie("accessToken").send("cookie cleared");
 };
 
 export const verification = (req, res) => {

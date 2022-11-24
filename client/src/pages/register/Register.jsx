@@ -41,7 +41,7 @@ const Register = () => {
     <div className="register">
       <div className="card">
         <div className="left">
-          <h1>Lama Social</h1>
+          <h1>my Book</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
           <span>Do you have an account?</span>
           <Link to="/login">

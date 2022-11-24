@@ -1,10 +1,12 @@
 import Axios from "axios";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
 
 const Verification = () => {
   const { token } = useParams();
   const navigate = useNavigate();
+  const { logout } = useContext(AuthContext);
 
   function verif() {
     Axios.patch(
@@ -18,6 +20,7 @@ const Verification = () => {
     )
       .then((res) => {
         console.log(res);
+        logout();
         navigate("/login");
       })
       .catch((err) => {
@@ -27,7 +30,7 @@ const Verification = () => {
 
   useEffect(() => {
     verif();
-  }, []);
+  });
 
   return (
     <div

@@ -20,14 +20,12 @@ const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
   const locationPath = "/";
 
+  const { logout } = useContext(AuthContext);
+
   function logoutBtn() {
     localStorage.removeItem("user");
-    Axios.post("http://localhost:8800/api/auth/logout", {})
-      .then((res) => {
-        console.log(res.data);
-        navigate("/login");
-      })
-      .catch((err) => console.log(err));
+
+    logout();
   }
 
   const [profilePic, setProfilePic] = useState("");

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,8 +12,6 @@ const Login = () => {
   });
 
   const [err, setErr] = useState(null);
-
-  const navigate = useNavigate();
 
   function handleInput(e) {
     let { name, value } = e.target;
@@ -32,14 +31,24 @@ const Login = () => {
     } catch (err) {
       setErr(err.response.data);
     }
-    navigate("/");
   };
+
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser]);
+
+  console.log(currentUser);
 
   return (
     <div className="login">
       <div className="card">
         <div className="left">
-          <h1>Hello World.</h1>
+          <h1>Hello friends</h1>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
           <span>Don't have an account?</span>
           <Link to="/register">
